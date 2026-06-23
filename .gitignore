@@ -1,0 +1,14 @@
+# Database files
+data/stocks.db
+data/stocks_cleaned.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment files
+.env
+
+# Power BI files
+*.pbix

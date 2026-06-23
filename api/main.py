@@ -11,16 +11,25 @@ app = FastAPI(
 )
 
 # ── Database connection ────────────────────────────────────
-connection_url = URL.create(
-    drivername="postgresql",
-    username="postgres",
-    password="Aanyagupta@1", 
-    host="localhost",
-    port=5432,
-    database="nifty_analytics"
-)
-engine = create_engine(connection_url)
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
 
+# Use Railway DATABASE_URL if available, otherwise use local
+database_url = os.getenv("DATABASE_URL")
+
+if database_url:
+    engine = create_engine(database_url)
+else:
+    local_url = URL.create(
+        drivername="postgresql",
+        username="postgres",
+        password="Aanyagupta@1",
+        host="localhost",
+        port=5432,
+        database="nifty_analytics"
+    )
+    engine = create_engine(local_url)
 # ── Routes ─────────────────────────────────────────────────
 
 # Route 1 — Health check
